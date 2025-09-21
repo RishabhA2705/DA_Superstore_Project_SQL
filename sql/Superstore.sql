@@ -39,3 +39,9 @@ select od.OrderID, p.ProductName, od.Sales from OrderDetails od right join Produ
 select c.CustomerName , o.OrderID from Customers c left join Orders o on c.CustomerID = o.CustomerID UNION
 select c.CustomerName , o.OrderID from Customers c right join Orders o on c.CustomerID = o.CustomerID;
 
+-- Find customers from the same city (customer pairs)
+select c1.CustomerName as Customer1 , c2.CustomerName as Customer2 , c1.City from Customers c1 join Customers c2 on c1.City = c2.City
+and c1.CustomerID < c2.CustomerID Limit 10;
+
+-- Find orders placed on the same date (different customers).
+select o1.OrderID as order1 , o2.OrderID as order2 , o1.OrderDate from orders o1 join orders o2 on o1.OrderDate = o2.OrderDate and o1.OrderID < o2.OrderID Limit 10;
